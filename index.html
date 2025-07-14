@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charity: Water Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Start Screen -->
+  <div id="start-screen" class="overlay active">
+    <div class="modal">
+      <h1>Charity: Water Game</h1>
+      <p>Enter your name to begin helping provide clean water!</p>
+      <input type="text" id="player-name" placeholder="Your name" />
+      <button id="start-btn">Start</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div id="header-left">
+      <h2 id="player-display"></h2>
+      <div id="lives" class="big-stat">Drops: 💧💧💧💧💧</div>
+      <div id="buckets-filled" class="big-stat">Buckets Filled: 0</div>
+    </div>
+    <div id="header-right">
+      <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <ol id="leaderboard-list"></ol>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Game Area -->
+  <main>
+    <div id="game-container">
+      <div id="big-bucket-container">
+        <img src="img/water-can-transparent.png" alt="Big Bucket" id="big-bucket-img" />
+        <div id="bucket-progress-bar">
+          <div id="bucket-fill"></div>
+        </div>
+        <div id="horizontal-progress-wrapper">
+          <div id="horizontal-progress-bar"></div>
+          <div id="progress-text">0 / 100</div>
+        </div>
+      </div>
+
+      <div id="plinko-board">
+        <img src="img/cloud.png" alt="Cloud" id="cloud" style="left: 110px">
+        <div id="buckets-row">
+          <div class="bucket" data-points="10"><span class="bucket-value">10</span></div>
+          <div class="bucket" data-points="20"><span class="bucket-value">20</span></div>
+          <div class="bucket" data-points="50"><span class="bucket-value">50</span></div>
+        </div>
+      </div>
+      <div id="countdown-timer">Time: 10</div>
+      <button id="drop-btn">Drop</button>
+    </div>
+  </main>
+
+  <!-- Footer with Charity: Water branding -->
+  <footer>
+    <div id="charity-water-brand">
+      <img src="img/cw_logo.png" alt="Charity: Water Logo" id="charity-water-logo">
+    </div>
+    <div id="footer-buttons">
+      <button id="how-to-play-btn">How to Play</button>
+      <button id="about-btn">About Charity: Water</button>
+      <button id="donate-btn">Donate</button>
+      <button id="reset-btn">Reset Game</button>
+      <button id="pause-btn">Pause</button>
+    </div>
+  </footer>
+
+  <!-- How to Play Modal -->
+  <div id="how-to-play-modal" class="overlay">
+    <div class="modal">
+      <h2>How to Play</h2>
+      <p>Starting with 5 water drops, click and drag the cloud with your mouse OR use the left and right arrow key or 'a' and 'd' to move the cloud to where you want your water drop to fall and press the space bar or the 'Drop' button with your mouse to release the water drop💧. Every bucket you fill will add to your total score and provide an additional life, increasing your chances to join the leaderboard! (Golden 💧 gives 2x the points!)</p>
+      <button id="close-how-to-play">Close</button>
+    </div>
+  </div>
+
+  <!-- End Game Modal -->
+  <div id="end-game-modal" class="overlay">
+    <div class="modal">
+      <h2>Great Work!</h2>
+      <p id="end-game-message"></p>
+      <button id="play-again-btn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Pause Modal -->
+  <div id="pause-modal" class="overlay">
+    <div class="modal">
+      <h2>Game Paused</h2>
+      <p>The game is currently paused. Click resume to continue.</p>
+      <button id="resume-btn">Resume</button>
+    </div>
+  </div>
+
+  <!-- Bottom Fact Banner -->
+  <div id="fact-banner"><span id="fact-text"></span></div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

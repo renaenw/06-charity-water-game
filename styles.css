@@ -1,0 +1,506 @@
+:root {
+  --yellow: #FFC907;
+  --navy: #003366;
+  --blue-gray: #77A8BB;
+  --cream: #FFF7E1;
+  --black: #1A1A1A;
+  --tint: #FDF8EC;
+  --peach: #FEDBC1;
+  --rust: #BF6C46;
+  --gray: #CBCCD1;
+}
+
+body {
+  font-family: Georgia, serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--cream);
+  color: var(--black);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background-color: var(--yellow);
+  color: var(--black);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  margin: 5px;
+}
+
+#header-left {
+  text-align: left;
+  max-width: 50%;
+}
+
+#header-right {
+  text-align: right;
+  max-width: 40%;
+}
+
+#player-display {
+  font-size: 1.2em;
+  margin: 0 0 5px 0;
+}
+
+.big-stat {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+#leaderboard {
+  background: var(--tint);
+  color: var(--black);
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 200px;
+  width: auto;
+  max-width: 90vw;
+  margin: 0 auto;
+  word-break: break-word; /* Break long words/names */
+  overflow-wrap: break-word;
+  white-space: normal;    /* Allow wrapping */
+}
+
+#leaderboard h2 {
+  font-size: 1.2em;
+  margin: 5px 0;
+}
+
+#leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Make leaderboard entries wrap and not overflow */
+#leaderboard-list li {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  padding: 2px 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+#big-bucket-container {
+  position: relative;
+  width: 100px;
+  margin: 10px;
+}
+
+#big-bucket-img {
+  width: 100px;
+}
+
+#bucket-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 10px 10px;
+  background-color: var(--gray);
+}
+
+#bucket-fill {
+  width: 100%;
+  background-color: var(--blue-gray);
+  height: 0%;
+  transition: height 0.3s ease-in-out;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Plinko board area */
+#plinko-board {
+  position: relative;
+  width: 90vw;           /* Use 90% of viewport width */
+  max-width: 400px;      /* Maximum width for desktop */
+  min-width: 260px;      /* Minimum width for mobile */
+  height: 60vw;          /* Height scales with width */
+  max-height: 500px;
+  min-height: 320px;
+  background: #e0f7fa;
+  border-radius: 20px;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+#buckets-row {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+/* Pegs */
+.peg {
+  position: absolute;
+  width: 4vw;
+  height: 4vw;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 22px;
+  max-height: 22px;
+  background: #039be5;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Buckets */
+.bucket {
+  width: 13vw;
+  height: 13vw;
+  min-width: 45px;
+  min-height: 45px;
+  max-width: 70px;
+  max-height: 70px;
+  background: #ffd600;
+  border-radius: 0 0 30px 30px;
+  border: 2px solid #ffab00;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+/* Bucket points styling */
+.bucket-value {
+  font-weight: bold;
+  font-size: 22px;
+  color: #1565c0;
+  background: #fffde7;
+  border-radius: 8px;
+  padding: 2px 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+#cloud {
+  position: absolute;
+  top: 0;
+  left: 110px;
+  width: 80px;
+  cursor: grab;
+  z-index: 5;
+}
+
+.droplet {
+  position: absolute;
+  width: 26px;
+  height: 34px;
+  background: url('img/waterdrop.png') no-repeat center center;
+  background-size: contain;
+  z-index: 10;
+}
+
+button,
+#drop-btn {
+  background-color: var(--yellow);
+  color: var(--black);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover,
+#drop-btn:hover {
+  background-color: var(--rust);
+  transform: translateY(-2px);
+}
+
+footer {
+  gap: 10px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal {
+  background-color: var(--tint);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 300px;
+  color: var(--black);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.overlay.active {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  main {
+    flex-direction: row;
+  }
+
+  #game-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #big-bucket-container {
+    margin-right: 20px;
+  }
+}
+
+#charity-water-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+#charity-water-logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 4px;
+}
+
+#footer-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  position: fixed;
+  left: 10px;
+  bottom: 60px;
+}
+
+#countdown-timer {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--navy);
+  margin: 10px;
+}
+
+.droplet.golden {
+  /* Keep the blue droplet image, add a gold glow */
+  box-shadow: 0 0 12px 4px gold;
+  /* Remove brightness filter and gold border */
+}
+
+.splash {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(46, 157, 247, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 12;
+  animation: splash-animation 0.5s ease-out forwards;
+}
+
+@keyframes splash-animation {
+  0% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.splash-golden {
+  background: rgba(255, 215, 0, 0.85);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+#horizontal-progress-wrapper {
+  position: relative;
+  width: 100px;
+  height: 14px;
+  background-color: var(--gray);
+  border-radius: 5px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+#horizontal-progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--yellow);
+  transition: width 0.3s ease-in-out;
+}
+
+#progress-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: var(--black);
+  line-height: 14px;
+  pointer-events: none;
+}
+
+#fact-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--navy);
+  color: var(--cream);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  z-index: 100;
+}
+
+#fact-text {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.points-popup {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: var(--rust);
+  animation: floatUpFade 2s ease-out forwards;
+  z-index: 20;
+  pointer-events: none;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+@keyframes floatUpFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+.points-popup {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: var(--rust);
+  animation: floatUpFade 2s ease-out forwards;
+  z-index: 20;
+  pointer-events: none;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.points-popup.golden-points {
+  color: #b8860b; /* darker gold */
+  font-size: 1.3em;
+  text-shadow: 0 0 8px gold;
+}
+
+#big-bucket-img {
+  position: relative;
+  z-index: 2;
+}
+
+#bucket-fill {
+  position: absolute;
+  z-index: 1;
+}
+
+.bucket {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid var(--navy);
+  background: transparent;
+}
+
+.bucket-img {
+  width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.bucket-value {
+  position: absolute;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: var(--black);
+  text-shadow: 1px 1px 3px var(--cream);
+  pointer-events: none;
+}
+
+/* Responsive tweaks for very small screens */
+@media (max-width: 500px) {
+  #plinko-board {
+    max-width: 98vw;
+    height: 70vw;
+    min-height: 220px;
+  }
+  .bucket {
+    font-size: 15px;
+  }
+  .peg {
+    min-width: 12px;
+    min-height: 12px;
+    max-width: 16px;
+    max-height: 16px;
+  }
+}
+
+html, body {
+  min-height: 100vh;
+  position: relative;
+}
+
+body {
+  padding-bottom: 60px; /* fallback for environments that ignore main padding */
+}
